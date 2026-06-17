@@ -1,25 +1,33 @@
 # antislop
 
-A Claude skill that edits text, copy, and content so it reads like a real person
-wrote it — not like AI. It strips the generic "tells" (filler transitions,
-hedging, inflated corporate words, em-dash overuse, the "it's not just X, it's Y"
-move, empty conclusions) while keeping the author's meaning and voice intact.
+A Claude skill that first **scores** text for "AI slop" — the way
+[slopdetector.org](https://slopdetector.org) does — and then, if you want,
+**rewrites** it to read like a real person wrote it, without changing what it
+says or flattening your voice.
 
-> **Status:** early. The scaffold and install flow are in place; the editing
-> rules are being built out. See [`antislop/references/ai-tells.md`](antislop/references/ai-tells.md).
+> **Status:** early but working. Scoring + rewrite flow and the rules are in
+> place; we're still expanding the catalogue. See
+> [`antislop/references/ai-tells.md`](antislop/references/ai-tells.md).
 
 ## What it does
 
-Paste in any text and ask Claude to make it sound more human. By default the
-skill makes **surgical edits** (preserving your voice), returns the **rewritten
-text**, and adds a **short note on what it changed and why**.
+Two steps, in order:
+
+1. **Detect & score** — rates the text **0–100** (higher = more slop) across five
+   dimensions: slop vocabulary, cliché phrases, sentence structure, vocabulary
+   diversity, and content substance. It shows the exact words and phrases that
+   triggered each flag, and a verdict (*Not Slop* / *Some Slop* / *Generic Slop*).
+2. **Ask, then rewrite** — it asks whether you want it de-slopped. If yes, it
+   makes **surgical edits** by default (your voice preserved), returns the
+   rewritten text, a short note on what changed, and the new score (e.g. 68 → 12).
 
 It triggers on requests like:
 
+- "Does this sound like AI? Score it."
+- "Rate this copy for slop."
 - "Make this sound less like AI / more human / more natural."
 - "De-slop this landing page copy."
 - "Tighten this email so it doesn't read so robotic."
-- "Punch up this blog intro."
 
 ## Repository layout
 
@@ -85,19 +93,21 @@ zip -r antislop.skill antislop
 
 ## Usage
 
-Once installed, just ask in plain language:
+Once installed, just paste text and ask:
 
 ```
-Make this sound less like AI:
+Score this for slop:
 
 "In today's fast-paced world, it's important to note that our cutting-edge
 platform doesn't just streamline your workflow — it revolutionizes it."
 ```
 
-Claude will return a cleaned-up version plus a short note on what changed.
+Claude returns a slop score with the specific flags, then asks if you want it
+de-slopped. Say yes and you get a clean rewrite, a note on what changed, and the
+new score.
 
-To control intensity, say so: "light pass, keep my voice" or "full rewrite, make
-it punchy."
+To skip the ask, tell it up front: "score this and fix it." To control intensity:
+"light pass, keep my voice" or "full rewrite, make it punchy."
 
 ## Updating
 

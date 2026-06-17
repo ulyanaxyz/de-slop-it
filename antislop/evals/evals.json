@@ -1,4 +1,23 @@
 {
   "skill_name": "antislop",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Does this sound like AI? Score it:\n\n\"I'm thrilled to announce that I've learned a valuable lesson about leadership. In today's fast-paced world, it's more important than ever to stay authentic and leverage synergies. Here are 5 key takeaways that changed my perspective forever...\"",
+      "expected_output": "A slop score (~high) flagging slop vocabulary ('leverage', 'synergies'), cliche phrases ('In today's fast-paced world', 'thrilled to announce'), and low content substance (no named lesson). Verdict names Generic Slop + Pseudo-Insight Slop. Then asks before rewriting.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Rate this wellness blog intro for slop and then make it sound human:\n\n\"Remember that self-care isn't selfish - it's necessary. Take time to breathe, practice gratitude, and honor your journey. You are exactly where you need to be. Embrace your authentic self and set healthy boundaries.\"",
+      "expected_output": "Scores it (Wellness Slop: universalized advice, no specifics/techniques, 'it's not just X, it's Y' construction). Shows score first, then rewrites surgically without inventing facts.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Is this AI slop?\n\n\"Research has consistently demonstrated that implementing these strategies leads to significant improvements. Industry leaders have long recognized the importance of this approach. Studies show that organizations who adopt these methods see a 300% increase in results.\"",
+      "expected_output": "Flags Fake Authority Slop: 'Studies show' with no citation, 'industry leaders' with no names, unsourced '300% increase'. Rewrite guidance must NOT fabricate citations - cut or ask author for the source. Asks before rewriting.",
+      "files": []
+    }
+  ]
 }
