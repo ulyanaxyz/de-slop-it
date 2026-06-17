@@ -107,8 +107,8 @@ Return the rewritten text, then:
 
 ## The five dimensions
 
-These mirror slopdetector.org. Full patterns and examples live in
-`references/ai-tells.md` — read it before scoring.
+Full patterns and examples live in `references/ai-tells.md` — read it before
+scoring.
 
 1. **Slop vocabulary** — overused words: "leverage", "utilize", "delve",
    "seamless", "robust", "elevate", "unlock", "game-changing".
