@@ -5,8 +5,8 @@ to score text and to guide rewrites. These build *judgment*, not a rigid
 find-and-replace list — context decides whether something is actually a problem.
 Flag patterns and accumulation, not isolated instances.
 
-> Modeled on slopdetector.org's five-dimension system. Each dimension scores
-> 0–20 (higher = more slop); the total is 0–100.
+> Five-dimension scoring system. Each dimension scores 0–20 (higher = more
+> slop); the total is 0–100.
 
 ---
 
@@ -87,8 +87,8 @@ The five dimensions score *how* sloppy text is. These archetypes name *what kind
 of slop it is — use them to make the verdict specific and memorable (e.g.
 "Verdict: Generic Slop + Fake Authority Slop"). A piece can have more than one.
 
-The five canonical types (from slopdetector.org/slop-taxonomy). They overlap
-constantly — real slop usually combines several.
+The five canonical types. They overlap constantly — real slop usually combines
+several.
 
 ### Generic Slop
 *"The verbal equivalent of stock photos."* Templated, vague content with no
