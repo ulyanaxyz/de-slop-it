@@ -55,7 +55,7 @@ Copy or symlink the skill folder into your personal skills directory:
 
 ```bash
 # clone this repo somewhere
-git clone https://github.com/<your-username>/antislop.git
+git clone https://github.com/ulyanaxyz/antislop.git
 cd antislop
 
 # copy it in
