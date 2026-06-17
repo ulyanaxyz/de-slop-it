@@ -17,7 +17,7 @@ description: >-
 Two jobs, done in order:
 
 1. **Detect** — score a piece of text for "AI slop" and show exactly what's
-   wrong, the way a tool like slopdetector.org does.
+   wrong.
 2. **Rewrite** — *after asking the user*, fix the flagged problems so the text
    reads like a real person wrote it, without changing what it says or flattening
    the author's voice.
