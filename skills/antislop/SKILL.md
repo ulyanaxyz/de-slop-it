@@ -50,7 +50,7 @@ Verdict: Generic Slop
 Scoring guidance:
 
 - **Each dimension is 0–20, where higher means MORE slop.** Total is the sum,
-  0–100. This mirrors slopdetector.org so scores feel familiar.
+  0–100, so scores feel familiar and easy to compare.
 - **Verdict band:** 0–25 *Not Slop* · 26–60 *Some Slop* · 61–100 *Heavy Slop*.
 - **Name the archetype** when one fits, to make the verdict specific — e.g.
   "Generic Slop", "Pseudo-Insight Slop", "Fake Authority Slop", "Wikipedia
