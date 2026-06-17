@@ -7,6 +7,19 @@ person wrote it — without changing your meaning or flattening your voice.
 > pattern catalogue is still growing. See
 > [`skills/antislop/references/ai-tells.md`](skills/antislop/references/ai-tells.md).
 
+## Quick start
+
+Install it into Claude Code with the [`skills`](https://www.npmjs.com/package/skills)
+CLI:
+
+```bash
+npx skills add ulyanaxyz/antislop
+```
+
+Restart Claude Code, paste some text, and ask it to "score this for slop." That's
+it. See [Installation](#installation) for project vs. global scope, other agents,
+and manual setup.
+
 ## What it does
 
 Two steps, in order:
@@ -48,33 +61,41 @@ antislop/
 ```
 
 The skill uses the standard `skills/<name>/SKILL.md` layout so the
-[`npx skills`](https://github.com/vercel-labs/skills) CLI can install it directly
-from GitHub.
+[`skills`](https://www.npmjs.com/package/skills) CLI discovers and installs it
+directly from GitHub.
 
 ## Installation
 
-Pick the method that matches how you use Claude.
+The main path is the [`skills`](https://www.npmjs.com/package/skills) CLI — it
+installs straight from this repo, no clone or copying. Manual options follow for
+anyone who'd rather not use it.
 
-### Option A — `npx skills` (recommended)
-
-The [`npx skills`](https://github.com/vercel-labs/skills) CLI installs straight
-from this repo. No clone, no copying:
+### With the `skills` CLI (recommended)
 
 ```bash
-# Claude Code, personal (all your projects)
-npx skills add ulyanaxyz/antislop -a claude-code -g
-
 # this project only (drops it in ./.claude/skills/)
-npx skills add ulyanaxyz/antislop -a claude-code
+npx skills add ulyanaxyz/antislop
 
-# see what's in the repo first
+# all your projects (installs to ~/.claude/skills/)
+npx skills add ulyanaxyz/antislop -g
+
+# see what's in the repo before installing
 npx skills add ulyanaxyz/antislop --list
 ```
 
-It targets other agents too (`cursor`, `codex`, `continue`, and more) via `-a`.
-Restart Claude Code, then ask it to "score this for slop."
+By default it targets Claude Code. Add `-a` to target other agents the CLI
+supports (Cursor, Codex, Cline, Continue, Windsurf, and more), e.g.
+`-a cursor`. Other handy commands:
 
-### Option B — manual clone
+```bash
+npx skills list                 # what's installed
+npx skills update antislop      # pull the latest version
+npx skills remove antislop      # uninstall
+```
+
+Restart Claude Code after installing, then ask it to "score this for slop."
+
+### Manual — clone the repo
 
 ```bash
 git clone https://github.com/ulyanaxyz/antislop.git
@@ -93,7 +114,7 @@ mkdir -p .claude/skills
 cp -r /path/to/antislop/skills/antislop .claude/skills/antislop
 ```
 
-### Option C — Claude.ai
+### Manual — Claude.ai
 
 Zip the skill folder and upload it under **Settings → Capabilities → Skills**:
 
@@ -121,8 +142,8 @@ To skip the prompt, ask up front: "score this and fix it." To set the intensity:
 
 ## Updating
 
-Installed with `npx skills` or a symlink? Re-run the command or `git pull`. If you
-copied the folder, copy it again after pulling.
+Installed with the CLI? Run `npx skills update antislop`. Symlinked? `git pull` in
+the cloned repo. Copied the folder? Copy it again after pulling.
 
 ## Contributing
 
