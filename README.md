@@ -1,33 +1,36 @@
 # antislop
 
-A Claude skill that first **scores** text for "AI slop" — the way
-[slopdetector.org](https://slopdetector.org) does — and then, if you want,
-**rewrites** it to read like a real person wrote it, without changing what it
-says or flattening your voice.
+A Claude skill that scores text for "AI slop," then rewrites it to read like a
+person wrote it — without changing your meaning or flattening your voice.
 
-> **Status:** early but working. Scoring + rewrite flow and the rules are in
-> place; we're still expanding the catalogue. See
+> **Status:** early but working. The scoring and rewrite flow run end to end; the
+> pattern catalogue is still growing. See
 > [`skills/antislop/references/ai-tells.md`](skills/antislop/references/ai-tells.md).
 
 ## What it does
 
 Two steps, in order:
 
-1. **Detect & score** — rates the text **0–100** (higher = more slop) across five
-   dimensions: slop vocabulary, cliché phrases, sentence structure, vocabulary
-   diversity, and content substance. It shows the exact words and phrases that
-   triggered each flag, and a verdict (*Not Slop* / *Some Slop* / *Generic Slop*).
-2. **Ask, then rewrite** — it asks whether you want it de-slopped. If yes, it
-   makes **surgical edits** by default (your voice preserved), returns the
-   rewritten text, a short note on what changed, and the new score (e.g. 68 → 12).
+1. **Score it.** Rates the text 0–100 (higher means more slop) across five things:
+   slop vocabulary, cliché phrases, sentence structure, vocabulary diversity, and
+   content substance. It quotes the exact words that triggered each flag and gives
+   a verdict — *Not Slop*, *Some Slop*, or *Heavy Slop* — naming the slop type
+   where one fits (Generic, Pseudo-Insight, Fake Authority, Wikipedia Rehash,
+   Wellness).
+2. **Then ask, then rewrite.** It asks before touching your text. Say yes and it
+   makes surgical edits that keep your voice, hands back the rewrite with a note
+   on what changed, and shows the new score (say, 68 → 12).
 
-It triggers on requests like:
+It won't invent facts to pad the score. When a piece has no real substance, it
+tells you where a number, source, or example is missing instead of making one up.
+
+Ask for it however feels natural:
 
 - "Does this sound like AI? Score it."
 - "Rate this copy for slop."
-- "Make this sound less like AI / more human / more natural."
-- "De-slop this landing page copy."
-- "Tighten this email so it doesn't read so robotic."
+- "Make this sound more human."
+- "De-slop this landing page."
+- "Tighten this email so it reads less robotic."
 
 ## Repository layout
 
@@ -44,64 +47,64 @@ antislop/
         └── evals/                ← test cases for iterating on the skill
 ```
 
-The skill follows the standard `skills/<name>/SKILL.md` layout so the
-[`npx skills`](https://github.com/vercel-labs/skills) CLI can auto-install it.
+The skill uses the standard `skills/<name>/SKILL.md` layout so the
+[`npx skills`](https://github.com/vercel-labs/skills) CLI can install it directly
+from GitHub.
 
 ## Installation
 
 Pick the method that matches how you use Claude.
 
-### Option A — `npx skills` (recommended, auto-install)
+### Option A — `npx skills` (recommended)
 
 The [`npx skills`](https://github.com/vercel-labs/skills) CLI installs straight
-from this GitHub repo — no clone, no manual copying:
+from this repo. No clone, no copying:
 
 ```bash
-# install into Claude Code (personal/global)
+# Claude Code, personal (all your projects)
 npx skills add ulyanaxyz/antislop -a claude-code -g
 
-# or into the current project only (drops it in ./.claude/skills/)
+# this project only (drops it in ./.claude/skills/)
 npx skills add ulyanaxyz/antislop -a claude-code
 
-# preview what's in the repo first
+# see what's in the repo first
 npx skills add ulyanaxyz/antislop --list
 ```
 
-It also targets other agents (`cursor`, `codex`, `continue`, …) via `-a`.
+It targets other agents too (`cursor`, `codex`, `continue`, and more) via `-a`.
 Restart Claude Code, then ask it to "score this for slop."
 
-### Option B — Claude Code, manual clone
+### Option B — manual clone
 
 ```bash
 git clone https://github.com/ulyanaxyz/antislop.git
 cd antislop
 
-# symlink so `git pull` keeps it up to date…
+# symlink so `git pull` keeps it current…
 ln -s "$(pwd)/skills/antislop" ~/.claude/skills/antislop
-# …or copy it in
+# …or just copy it
 cp -r skills/antislop ~/.claude/skills/antislop
 ```
 
-For a single project instead, copy into that project's `.claude/skills/`:
+For one project only, copy into that project's `.claude/skills/`:
 
 ```bash
 mkdir -p .claude/skills
 cp -r /path/to/antislop/skills/antislop .claude/skills/antislop
 ```
 
-### Option C — Claude.ai (upload a packaged skill)
+### Option C — Claude.ai
 
-1. Package the skill into a `.skill` file (a zip of the skill folder).
-2. In Claude.ai, go to **Settings → Capabilities → Skills** and upload it.
+Zip the skill folder and upload it under **Settings → Capabilities → Skills**:
 
 ```bash
-cd skills          # the skill folder's parent
+cd skills
 zip -r antislop.skill antislop
 ```
 
 ## Usage
 
-Once installed, just paste text and ask:
+Paste your text and ask:
 
 ```
 Score this for slop:
@@ -110,25 +113,28 @@ Score this for slop:
 platform doesn't just streamline your workflow — it revolutionizes it."
 ```
 
-Claude returns a slop score with the specific flags, then asks if you want it
-de-slopped. Say yes and you get a clean rewrite, a note on what changed, and the
-new score.
+You get a score with the specific flags, then a prompt to de-slop it. Say yes and
+you get the rewrite, a note on what changed, and the new score.
 
-To skip the ask, tell it up front: "score this and fix it." To control intensity:
+To skip the prompt, ask up front: "score this and fix it." To set the intensity:
 "light pass, keep my voice" or "full rewrite, make it punchy."
 
 ## Updating
 
-If you symlinked (Option A), `git pull` is enough. If you copied, re-copy the
-folder after pulling.
+Installed with `npx skills` or a symlink? Re-run the command or `git pull`. If you
+copied the folder, copy it again after pulling.
 
-## Contributing / developing the skill
+## Contributing
 
-The editing rules live in [`skills/antislop/references/ai-tells.md`](skills/antislop/references/ai-tells.md)
-and the skill instructions in [`skills/antislop/SKILL.md`](skills/antislop/SKILL.md). Test
-cases for iterating go in `skills/antislop/evals/`. PRs that add good before/after
-examples or new tells are welcome.
+The rules live in
+[`skills/antislop/references/ai-tells.md`](skills/antislop/references/ai-tells.md)
+(detection) and
+[`skills/antislop/references/rewrite-guide.md`](skills/antislop/references/rewrite-guide.md)
+(the fix); the skill itself is in
+[`skills/antislop/SKILL.md`](skills/antislop/SKILL.md). Test cases go in
+`skills/antislop/evals/`. Pull requests with good before/after examples or new
+tells are welcome.
 
 ## License
 
-See [LICENSE](LICENSE).
+[MIT](LICENSE).
