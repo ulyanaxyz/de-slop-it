@@ -7,7 +7,7 @@ says or flattening your voice.
 
 > **Status:** early but working. Scoring + rewrite flow and the rules are in
 > place; we're still expanding the catalogue. See
-> [`antislop/references/ai-tells.md`](antislop/references/ai-tells.md).
+> [`skills/antislop/references/ai-tells.md`](skills/antislop/references/ai-tells.md).
 
 ## What it does
 
@@ -34,60 +34,68 @@ It triggers on requests like:
 ```
 antislop/
 ├── README.md                     ← you are here
-└── antislop/                     ← the installable skill folder
-    ├── SKILL.md                  ← skill definition (frontmatter + instructions)
-    ├── references/
-    │   └── ai-tells.md           ← catalogue of AI patterns to fix
-    ├── scripts/                  ← helper scripts (added as needed)
-    └── evals/                    ← test cases for iterating on the skill
+└── skills/
+    └── antislop/                 ← the installable skill folder
+        ├── SKILL.md              ← skill definition (frontmatter + instructions)
+        ├── references/
+        │   ├── ai-tells.md       ← catalogue of AI patterns to fix
+        │   └── rewrite-guide.md  ← the antidote: how to fix slop
+        ├── scripts/              ← helper scripts (added as needed)
+        └── evals/                ← test cases for iterating on the skill
 ```
 
-The inner `antislop/` folder is the unit you install.
+The skill follows the standard `skills/<name>/SKILL.md` layout so the
+[`npx skills`](https://github.com/vercel-labs/skills) CLI can auto-install it.
 
 ## Installation
 
-The skill works anywhere Claude reads skills. Pick the method that matches how
-you use Claude.
+Pick the method that matches how you use Claude.
 
-### Option A — Claude Code, personal (available in every project)
+### Option A — `npx skills` (recommended, auto-install)
 
-Copy or symlink the skill folder into your personal skills directory:
+The [`npx skills`](https://github.com/vercel-labs/skills) CLI installs straight
+from this GitHub repo — no clone, no manual copying:
 
 ```bash
-# clone this repo somewhere
+# install into Claude Code (personal/global)
+npx skills add ulyanaxyz/antislop -a claude-code -g
+
+# or into the current project only (drops it in ./.claude/skills/)
+npx skills add ulyanaxyz/antislop -a claude-code
+
+# preview what's in the repo first
+npx skills add ulyanaxyz/antislop --list
+```
+
+It also targets other agents (`cursor`, `codex`, `continue`, …) via `-a`.
+Restart Claude Code, then ask it to "score this for slop."
+
+### Option B — Claude Code, manual clone
+
+```bash
 git clone https://github.com/ulyanaxyz/antislop.git
 cd antislop
 
-# copy it in
-cp -r antislop ~/.claude/skills/antislop
-
-# …or symlink so `git pull` keeps it up to date
-ln -s "$(pwd)/antislop" ~/.claude/skills/antislop
+# symlink so `git pull` keeps it up to date…
+ln -s "$(pwd)/skills/antislop" ~/.claude/skills/antislop
+# …or copy it in
+cp -r skills/antislop ~/.claude/skills/antislop
 ```
 
-Restart Claude Code (or start a new session). Confirm it loaded by asking Claude
-to "make some text sound less like AI."
-
-### Option B — Claude Code, single project only
-
-Drop it into the project's `.claude/skills/` directory so only that repo sees it:
+For a single project instead, copy into that project's `.claude/skills/`:
 
 ```bash
 mkdir -p .claude/skills
-cp -r /path/to/antislop/antislop .claude/skills/antislop
+cp -r /path/to/antislop/skills/antislop .claude/skills/antislop
 ```
-
-Commit `.claude/skills/antislop/` if you want your whole team to get it.
 
 ### Option C — Claude.ai (upload a packaged skill)
 
 1. Package the skill into a `.skill` file (a zip of the skill folder).
 2. In Claude.ai, go to **Settings → Capabilities → Skills** and upload it.
 
-To package it manually:
-
 ```bash
-cd antislop          # the inner skill folder's parent
+cd skills          # the skill folder's parent
 zip -r antislop.skill antislop
 ```
 
@@ -116,9 +124,9 @@ folder after pulling.
 
 ## Contributing / developing the skill
 
-The editing rules live in [`antislop/references/ai-tells.md`](antislop/references/ai-tells.md)
-and the skill instructions in [`antislop/SKILL.md`](antislop/SKILL.md). Test
-cases for iterating go in `antislop/evals/`. PRs that add good before/after
+The editing rules live in [`skills/antislop/references/ai-tells.md`](skills/antislop/references/ai-tells.md)
+and the skill instructions in [`skills/antislop/SKILL.md`](skills/antislop/SKILL.md). Test
+cases for iterating go in `skills/antislop/evals/`. PRs that add good before/after
 examples or new tells are welcome.
 
 ## License
