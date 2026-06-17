@@ -4,8 +4,6 @@ How to fix sloppy writing, not just flag it. Removing AI tells is only half the
 job; the other half is putting *substance* back in. This is the target the
 rewrite aims at.
 
-> Based on slopdetector.org's "antidote" and "How to avoid writing slop."
-
 ## The four antidote qualities
 
 Across all five slop types, the cure is the same. Writing that has **any** of
