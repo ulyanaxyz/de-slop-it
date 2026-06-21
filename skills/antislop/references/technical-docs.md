@@ -137,6 +137,16 @@ docs and the Claude/Anthropic platform docs.
   and values — not "the appropriate model" or "your settings."
 - **Meet readers where they are.** Where relevant, cover the different languages
   or pathways a reader might use (e.g. React, TypeScript, Solidity, cURL).
+- **Orientation cues / reading paths.** Tell readers where to start and when to
+  come back, instead of dumping everything at once — e.g. "If you're new, start
+  with model capabilities and tools. Return to the other sections when you're
+  ready to optimize cost, latency, or scale."
+- **Verb-led, one-line descriptions.** In overviews and feature lists, each entry
+  says what it does in a single scannable line, ideally with a concrete number —
+  e.g. "Batch API calls cost 50% less than standard API calls." or "Up to 1M
+  tokens for processing large documents." Not "a powerful batching solution."
+- **Define your status/jargon terms.** Don't assume "Beta", "GA", "deprecated",
+  or domain acronyms are understood — define them once (a small table works well).
 
 When rewriting, move the text toward this standard — but only with the author's
 real facts. Don't invent example code, parameters, or outputs.
