@@ -56,6 +56,12 @@ The general rubric flags these; in documentation they're often *good practice*:
   imperative: "Edit `config.yaml`."
 - **Stale hedging.** "This may or may not work depending on your setup" with no
   guidance on which setup. Tell the reader how to know.
+- **Long, overloaded sentences.** Multi-clause sentences cramming several ideas.
+  Split them; aim for ~15–20 words and one idea each.
+- **Ambiguous pronouns.** "It returns this, which you pass to that." Name the
+  things — readers shouldn't have to guess what "it"/"this" points to.
+- **Non-descriptive link text.** "Click here", "this link", "see this." Link text
+  should say where it goes when read out of context.
 
 ## The antidote, mapped to docs
 
@@ -71,6 +77,61 @@ The four qualities still apply, just translated:
   spec, or the source file.
 - **Information gain** → after reading, the reader can complete the task. The
   test: could someone follow this and succeed without guessing?
+
+## Principles of good docs — the Three Cs
+
+Score and rewrite toward these. They come from established technical-writing
+practice (e.g. MDN's guidance).
+
+**Clarity**
+- One idea per sentence; one main idea per paragraph, each sentence connecting to
+  the last.
+- Use simple words and plain language — assume some readers are non-native
+  English speakers.
+- Introduce and define every new term before building on it.
+- Specify pronouns. Replace "it", "this", "these" with the actual noun when more
+  than one thing could be meant — ambiguity in docs causes real errors.
+- Use active voice when it clarifies *who does the action* (does the user call the
+  function, or does an event trigger it?). Passive is fine only when the actor is
+  irrelevant.
+
+**Conciseness**
+- Keep sentences short — roughly 15–20 words is a good target. Short sentences
+  raise clarity automatically.
+- Cut redundancy (same idea twice) and repetitiveness (same word/phrase overused
+  as filler) — but never at the cost of consistent *terminology*.
+
+**Consistency**
+- Same term for the same concept, everywhere. Same casing, same formatting.
+
+**Structure**
+- Open with a short intro: what the feature is and why the reader should care.
+- Progress from foundational → advanced; establish the *what* before the *why*
+  and *how*; follow concepts with how-to examples.
+- Lists: numbered for ordered steps, bulleted otherwise. Always lead a list with
+  a sentence of context.
+- Links: make link text descriptive and clear out of context — "see the
+  [config reference]", not "click [here]".
+
+## What good docs look like (positive standard)
+
+Aim for the qualities that strong docs (e.g. the Aave protocol docs) share:
+
+- **Progressive complexity.** A "101"/overview before smart-contract internals,
+  so newcomers and experts both find their level.
+- **Concrete examples early.** A quickstart with a real, runnable snippet before
+  abstract theory.
+- **Precise, consistent terminology.** Define the core concept once, plainly, and
+  reuse the exact terms — e.g. "a decentralised non-custodial liquidity protocol
+  where users participate as suppliers or borrowers."
+- **Explain the mechanism without dumbing it down.** "Suppliers provide liquidity
+  while earning interest; borrowers access liquidity by providing collateral that
+  exceeds the borrowed amount." Specific, accurate, readable.
+- **Meet readers where they are.** Where relevant, cover the different languages
+  or pathways a reader might use (e.g. React, TypeScript, Solidity).
+
+When rewriting, move the text toward this standard — but only with the author's
+real facts. Don't invent example code, parameters, or outputs.
 
 ## Scoring adjustments
 
