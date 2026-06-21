@@ -44,6 +44,13 @@ Ask for it however feels natural:
 - "Make this sound more human."
 - "De-slop this landing page."
 - "Tighten this email so it reads less robotic."
+- "Clean up this README so it doesn't sound AI-written."
+
+It's **genre-aware**: for technical documentation (READMEs, API docs, tutorials,
+runbooks) it switches to a doc-tuned rubric that rewards concrete, copy-pasteable
+instructions and flags marketing creep ("blazingly fast") and hand-wavy filler
+("simply", "just") — without penalizing the consistent terminology and parallel
+structure that good docs need.
 
 ## Repository layout
 

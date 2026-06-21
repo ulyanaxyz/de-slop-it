@@ -18,6 +18,12 @@
       "prompt": "Is this AI slop?\n\n\"Research has consistently demonstrated that implementing these strategies leads to significant improvements. Industry leaders have long recognized the importance of this approach. Studies show that organizations who adopt these methods see a 300% increase in results.\"",
       "expected_output": "Flags Fake Authority Slop: 'Studies show' with no citation, 'industry leaders' with no names, unsourced '300% increase'. Rewrite guidance must NOT fabricate citations - cut or ask author for the source. Asks before rewriting.",
       "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Clean up this README section so it's not so AI-sounding:\n\n\"Getting started with our powerful and intuitive SDK is incredibly simple! Our blazingly fast, world-class library seamlessly integrates with your existing workflow. Simply install the package and you're good to go. It's important to note that you should configure the settings appropriately for your environment. With our robust, feature-rich solution, you'll be able to build amazing things in no time!\"",
+      "expected_output": "Applies the technical-documentation lens. Flags marketing creep ('powerful', 'blazingly fast', 'world-class', 'seamlessly') and confidence/filler words ('simply', 'incredibly simple', 'It's important to note'), plus the vague instruction 'configure the settings appropriately'. Does NOT penalize repeated terms. Rewrite is concrete and imperative (e.g. real install command), asks author for the actual package name/config values rather than inventing them. Asks before rewriting.",
+      "files": []
     }
   ]
 }

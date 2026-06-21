@@ -9,7 +9,10 @@ description: >-
   rate content for slop, make text "sound more human / more natural / less
   robotic / less generic / less corporate," "de-slop," proofread, or punch up any
   text, email, blog post, landing page, caption, or document — even if they don't
-  say the word "AI."
+  say the word "AI." Also works on technical documentation (READMEs, API docs,
+  tutorials, guides, runbooks): it switches to a documentation-aware rubric that
+  rewards clear, concrete, copy-pasteable instructions and flags marketing creep
+  and hand-wavy "just/simply" filler instead of penalizing consistent terminology.
 ---
 
 # Antislop
@@ -27,11 +30,29 @@ they want the rewrite.
 
 ## The workflow
 
+### Step 0 — Pick the lens (genre matters)
+
+Before scoring, notice what kind of writing this is. The default rubric is tuned
+for prose — marketing copy, blog posts, emails, social posts.
+
+**If the text is technical documentation** (README, API reference, tutorial,
+runbook, setup guide, code comments, changelog — signals: code blocks, commands,
+file paths, parameter names, version numbers, "how to" steps), switch to the
+documentation lens in `references/technical-docs.md` and read it before scoring.
+It matters because docs play by different rules: consistent repeated terminology,
+parallel structure, definitions, and an impersonal voice are *correct* there, not
+slop — while marketing creep ("powerful", "blazingly fast") and confidence words
+("simply", "just", "obviously") are the real slop. Penalizing a good API doc for
+"low vocabulary diversity" would be exactly wrong.
+
+When the genre is ambiguous, ask the user or note which lens you applied.
+
 ### Step 1 — Score the text
 
 Read the text once for meaning and voice, then rate it against the five
 dimensions below. Read `references/ai-tells.md` for the detailed patterns and
-before/after examples behind each dimension.
+before/after examples behind each dimension. For documentation, apply the scoring
+adjustments in `references/technical-docs.md`.
 
 Present the score like this:
 
@@ -86,6 +107,13 @@ Removing slop is only half the job — put substance back in. Read
 **Specificity Test** and **Deletion Test** to each sentence, and run the
 anti-slop checklist before returning the result.
 
+For documentation, follow the rewrite priorities in
+`references/technical-docs.md` instead: make every instruction concrete and
+copy-pasteable, cut marketing and confidence words, keep terminology consistent
+(don't swap in synonyms), and **never alter a command, value, or API name** to
+make the prose flow — if something looks wrong, flag it rather than silently
+changing it.
+
 Hard rules for the rewrite:
 
 - **Never invent facts.** The "content substance" dimension rewards numbers,
@@ -130,3 +158,7 @@ scoring.
 - `references/rewrite-guide.md` — the antidote: the four qualities of non-slop
   writing, the rewrite principles, the Specificity/Deletion tests, and the
   anti-slop checklist. Read it before rewriting.
+- `references/technical-docs.md` — the documentation lens: which "tells" are fine
+  in docs, the doc-specific slop to catch, the antidote mapped to docs, and
+  scoring/rewrite adjustments. Read it whenever the text is technical
+  documentation.

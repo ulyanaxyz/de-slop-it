@@ -1,0 +1,94 @@
+# Technical Documentation lens
+
+Technical writing plays by different rules. README files, API references,
+tutorials, runbooks, guides, code comments, and changelogs are judged on whether
+a reader can *do the thing afterward* — not on voice, stance, or personality.
+
+Apply this lens when the text is clearly documentation. It overrides parts of the
+general rubric: some "AI tells" are correct here, and docs have slop of their own.
+
+## How to tell it's technical documentation
+
+Signals: code blocks, commands, file paths, API/parameter names, version numbers,
+install/setup steps, "how to" framing, error messages, configuration keys, or it
+lives in a README/docs site. When unsure, ask the user, or score both lenses and
+say which you applied.
+
+## What is NOT slop in docs (don't penalize these)
+
+The general rubric flags these; in documentation they're often *good practice*:
+
+- **Repeated terminology.** Use the same word for the same thing every time.
+  "Variety" here causes bugs — calling it "token", then "key", then "credential"
+  for one concept is worse than repetition. Don't dock vocabulary diversity for
+  consistent technical terms.
+- **Parallel structure.** Steps, parameter lists, and option tables *should* look
+  uniform. Symmetry aids scanning. Don't flag it as robotic.
+- **Definitional sentences.** "A webhook is an HTTP callback that…" is fine when
+  the reader needs the definition. Wikipedia Rehash only applies if the
+  definition is padding with no purpose, not when it's genuinely needed.
+- **No personal voice / stance / lived experience.** Docs are usually
+  impersonal by design. Don't ask for opinions, anecdotes, or a "disagreeable
+  stance." The antidote qualities map differently here (see below).
+- **Domain vocabulary used precisely.** "idempotent", "leverage" (as in
+  financial/technical leverage), "robust" (with a concrete meaning) — fine when
+  the word is exact, not decorative.
+
+## Documentation slop (DO flag these)
+
+- **Marketing creep.** Sales language leaking into reference material:
+  "powerful", "blazingly fast", "seamless", "effortless", "simply", "world-class",
+  "game-changing". Docs describe; they don't sell.
+- **Confidence words that hide difficulty.** "simply", "just", "easily",
+  "obviously", "of course", "trivial". They shame the reader when the step turns
+  out to be hard, and add nothing. Cut them.
+  - *Before:* "Simply configure the webhook and you're done."
+  - *After:* "Configure the webhook (steps below)."
+- **Vague instructions.** "Configure the settings appropriately," "set up your
+  environment as needed." Replace with the exact command, file, key, or value.
+- **Filler and throat-clearing.** Same as the general rubric: "It's important to
+  note that…", "In this section, we will…". Get to the instruction.
+- **Unexplained jargon and undefined acronyms.** First use should define or link.
+- **Missing concretes.** No example, no code snippet, no expected output, no
+  version. A doc with zero copy-pasteable specifics is the technical form of
+  "content substance = empty."
+- **Passive, agentless steps.** "The file should be edited." Who edits it? Use
+  imperative: "Edit `config.yaml`."
+- **Stale hedging.** "This may or may not work depending on your setup" with no
+  guidance on which setup. Tell the reader how to know.
+
+## The antidote, mapped to docs
+
+The four qualities still apply, just translated:
+
+- **Specificity** → exact commands, file paths, parameter names, version numbers,
+  and real values. If the reader can copy-paste it, that's the win.
+- **Lived experience** → replaced by **accuracy and completeness**: correct
+  steps, real expected output, the gotchas that actually bite people. (Still
+  never fabricate — if you don't know the real command or output, say so and ask
+  the author.)
+- **Cited sources** → links to the API reference, the relevant config docs, the
+  spec, or the source file.
+- **Information gain** → after reading, the reader can complete the task. The
+  test: could someone follow this and succeed without guessing?
+
+## Scoring adjustments
+
+- **Vocabulary diversity (dim. 4):** largely waive for consistent technical
+  terminology. Only flag genuinely lazy repetition (the same filler sentence
+  opener every step), not repeated domain nouns.
+- **Sentence structure (dim. 3):** don't penalize parallel steps or lists.
+  Still flag marketing cadence, rule-of-three hype, and "it's not just X, it's Y".
+- **Content substance (dim. 5):** weight this *heavily* — for docs, missing
+  commands/examples/outputs is the cardinal sin.
+- Keep slop vocabulary (dim. 1) and cliché phrases (dim. 2), and add the
+  marketing-creep and confidence-word checks above.
+
+## Rewrite priorities for docs
+
+1. Make every instruction concrete and copy-pasteable.
+2. Cut marketing and confidence words.
+3. Keep terminology consistent — don't "improve" it with synonyms.
+4. Use imperative voice for steps.
+5. Preserve all technical accuracy; never alter a command, value, or API name to
+   make prose flow. When something looks wrong, flag it — don't silently fix it.
