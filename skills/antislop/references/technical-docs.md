@@ -115,20 +115,28 @@ practice (e.g. MDN's guidance).
 
 ## What good docs look like (positive standard)
 
-Aim for the qualities that strong docs (e.g. the Aave protocol docs) share:
+Aim for the qualities that strong docs share. Two good models: the Aave protocol
+docs and the Claude/Anthropic platform docs.
 
-- **Progressive complexity.** A "101"/overview before smart-contract internals,
-  so newcomers and experts both find their level.
-- **Concrete examples early.** A quickstart with a real, runnable snippet before
-  abstract theory.
+- **Progressive complexity.** An overview/"101" before internals, so newcomers
+  and experts both find their level.
+- **Task-oriented entry points.** Lead with what the reader wants to *do* —
+  "Get started", "Build with X", "Quickstart" — not a feature catalogue. Action
+  verbs over noun piles.
+- **Concrete examples early.** A quickstart with a real, runnable snippet (with
+  the actual install command and expected output) before abstract theory.
+- **Separate concept from how-to.** Conceptual explanation and step-by-step
+  guides are distinct, so readers can learn or just execute.
 - **Precise, consistent terminology.** Define the core concept once, plainly, and
   reuse the exact terms — e.g. "a decentralised non-custodial liquidity protocol
   where users participate as suppliers or borrowers."
 - **Explain the mechanism without dumbing it down.** "Suppliers provide liquidity
   while earning interest; borrowers access liquidity by providing collateral that
   exceeds the borrowed amount." Specific, accurate, readable.
+- **Exact, copy-pasteable specifics.** Real model/version IDs, parameter names,
+  and values — not "the appropriate model" or "your settings."
 - **Meet readers where they are.** Where relevant, cover the different languages
-  or pathways a reader might use (e.g. React, TypeScript, Solidity).
+  or pathways a reader might use (e.g. React, TypeScript, Solidity, cURL).
 
 When rewriting, move the text toward this standard — but only with the author's
 real facts. Don't invent example code, parameters, or outputs.
